@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://ciiewr6m4dmyh"]
+
+[ext_resource type="PackedScene" uid="uid://csrto3cfpp7te" path="res://scenes/player.tscn" id="1_7ug8h"]
+[ext_resource type="Texture2D" uid="uid://dniorvrvl273f" path="res://cuadrado.jpg" id="3_5qbmg"]
+[ext_resource type="PackedScene" uid="uid://c44glx5juddjy" path="res://scenes/bee.tscn" id="4_frvfp"]
+[ext_resource type="Script" uid="uid://b2m2i3ujxo08e" path="res://scenes/runner/fall_hazard.gd" id="5_frvfp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y21ji"]
+size = Vector2(1150, 126)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ug8h"]
+normal = Vector2(0, 21)
+
+[node name="Runner" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_7ug8h")]
+position = Vector2(392, 421)
+
+[node name="Piso1" type="StaticBody2D" parent="."]
+position = Vector2(864, 586)
+scale = Vector2(1.5, 0.962)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Piso1"]
+scale = Vector2(3.62199, 0.400001)
+texture = ExtResource("3_5qbmg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Piso1"]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_y21ji")
+
+[node name="Piso2" type="StaticBody2D" parent="."]
+position = Vector2(2649, 586)
+scale = Vector2(1.5, 0.962)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Piso2"]
+scale = Vector2(3.62199, 0.400001)
+texture = ExtResource("3_5qbmg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Piso2"]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_y21ji")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Bee" parent="Enemies" instance=ExtResource("4_frvfp")]
+position = Vector2(1068, 487)
+
+[node name="Bee2" parent="Enemies" instance=ExtResource("4_frvfp")]
+position = Vector2(1380, 487)
+
+[node name="Bee3" parent="Enemies" instance=ExtResource("4_frvfp")]
+position = Vector2(2545, 487)
+
+[node name="FallHazard" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_frvfp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallHazard"]
+shape = SubResource("WorldBoundaryShape2D_7ug8h")
+
+[connection signal="body_entered" from="FallHazard" to="FallHazard" method="_on_body_entered"]

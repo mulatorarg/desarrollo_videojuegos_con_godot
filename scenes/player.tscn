@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://csrto3cfpp7te"]
+
+[ext_resource type="Script" uid="uid://bgaq1ibkjg17b" path="res://scenes/runner/runner.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://kxas00vhpeux" path="res://assets/Spritesheets/spritesheet-characters-default.png" id="2_g2els"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("2_g2els")
+region = Rect2(384, 768, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"jumping",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"running",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0q11q"]
+size = Vector2(68, 92)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_g2els")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3vyb7")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_0q11q")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_bottom = 648
+limit_smoothed = true
