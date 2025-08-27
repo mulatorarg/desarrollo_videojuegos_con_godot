@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://csrto3cfpp7te"]
+[gd_scene load_steps=9 format=3 uid="uid://csrto3cfpp7te"]
 
 [ext_resource type="Script" uid="uid://bgaq1ibkjg17b" path="res://scenes/runner/runner.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://kxas00vhpeux" path="res://assets/Spritesheets/spritesheet-characters-default.png" id="2_g2els"]
@@ -6,6 +6,18 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("2_g2els")
 region = Rect2(384, 768, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("2_g2els")
+region = Rect2(384, 640, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("2_g2els")
+region = Rect2(384, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("2_g2els")
+region = Rect2(384, 512, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
 animations = [{
@@ -17,12 +29,21 @@ animations = [{
 "name": &"idle",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}],
 "loop": true,
 "name": &"jumping",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}],
 "loop": true,
 "name": &"running",
 "speed": 5.0
@@ -35,9 +56,11 @@ size = Vector2(68, 92)
 collision_mask = 2
 script = ExtResource("1_g2els")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3vyb7")
 animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.633993
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 16)
@@ -46,5 +69,6 @@ shape = SubResource("RectangleShape2D_0q11q")
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
 limit_top = 0
+limit_right = 3734
 limit_bottom = 648
 limit_smoothed = true

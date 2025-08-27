@@ -1,48 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciiewr6m4dmyh"]
+[gd_scene load_steps=9 format=3 uid="uid://ciiewr6m4dmyh"]
 
 [ext_resource type="PackedScene" uid="uid://csrto3cfpp7te" path="res://scenes/player.tscn" id="1_7ug8h"]
 [ext_resource type="Texture2D" uid="uid://dniorvrvl273f" path="res://cuadrado.jpg" id="3_5qbmg"]
 [ext_resource type="PackedScene" uid="uid://c44glx5juddjy" path="res://scenes/bee.tscn" id="4_frvfp"]
+[ext_resource type="Texture2D" uid="uid://k4oiu6j1028w" path="res://assets/Vector/Tiles/door_open_top.svg" id="5_aorww"]
 [ext_resource type="Script" uid="uid://b2m2i3ujxo08e" path="res://scenes/runner/fall_hazard.gd" id="5_frvfp"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ug8h"]
+normal = Vector2(0, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y21ji"]
 size = Vector2(1150, 126)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ug8h"]
-normal = Vector2(0, 21)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ug8h"]
+size = Vector2(62, 56)
 
 [node name="Runner" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_7ug8h")]
 position = Vector2(392, 421)
-
-[node name="Piso1" type="StaticBody2D" parent="."]
-position = Vector2(864, 586)
-scale = Vector2(1.5, 0.962)
-collision_layer = 2
-collision_mask = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="Piso1"]
-scale = Vector2(3.62199, 0.400001)
-texture = ExtResource("3_5qbmg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Piso1"]
-position = Vector2(1, -2)
-shape = SubResource("RectangleShape2D_y21ji")
-
-[node name="Piso2" type="StaticBody2D" parent="."]
-position = Vector2(2649, 586)
-scale = Vector2(1.5, 0.962)
-collision_layer = 2
-collision_mask = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="Piso2"]
-scale = Vector2(3.62199, 0.400001)
-texture = ExtResource("3_5qbmg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Piso2"]
-position = Vector2(1, -2)
-shape = SubResource("RectangleShape2D_y21ji")
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -63,4 +39,84 @@ script = ExtResource("5_frvfp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallHazard"]
 shape = SubResource("WorldBoundaryShape2D_7ug8h")
 
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Piso1" type="StaticBody2D" parent="Environment"]
+position = Vector2(864, 586)
+scale = Vector2(1.5, 0.962)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Piso1"]
+scale = Vector2(3.62199, 0.400001)
+texture = ExtResource("3_5qbmg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Piso1"]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_y21ji")
+
+[node name="Piso2" type="StaticBody2D" parent="Environment"]
+position = Vector2(2797, 586)
+scale = Vector2(1.5, 0.962)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Piso2"]
+scale = Vector2(3.62199, 0.400001)
+texture = ExtResource("3_5qbmg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Piso2"]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_y21ji")
+
+[node name="ParedIzquirda" type="StaticBody2D" parent="Environment"]
+position = Vector2(-72, 269)
+rotation = -1.57079
+scale = Vector2(0.7, 0.962)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/ParedIzquirda"]
+scale = Vector2(3.62199, 0.400001)
+texture = ExtResource("3_5qbmg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/ParedIzquirda"]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_y21ji")
+
+[node name="ParedDerecha" type="StaticBody2D" parent="Environment"]
+position = Vector2(3734, 269)
+rotation = -1.57079
+scale = Vector2(0.7, 0.962)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment/ParedDerecha"]
+scale = Vector2(3.62199, 0.400001)
+texture = ExtResource("3_5qbmg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/ParedDerecha"]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_y21ji")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(3428, 488)
+collision_layer = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("5_aorww")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_7ug8h")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 3304.0
+offset_top = 456.0
+offset_right = 3385.0
+offset_bottom = 479.0
+text = "¡GANASTE!"
+
 [connection signal="body_entered" from="FallHazard" to="FallHazard" method="_on_body_entered"]
+[connection signal="body_entered" from="Area2D" to="FallHazard" method="_on_area_2d_body_entered"]
